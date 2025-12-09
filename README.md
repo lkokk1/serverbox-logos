@@ -38,6 +38,7 @@ https://*.github.io/serverbox-logos/{DIST}-{BRIGHT}.png
 | Deepin     | deepin              | deepin.svg | 否 |
 | Kali Linux | kali                | kali.svg | 否 |
 | Armbian    | armbian             | armbian.svg | 否 |
+| Synology DMS    | synology             | synology.svg | 否 |
 
 ---
 
