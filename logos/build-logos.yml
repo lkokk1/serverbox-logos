@@ -1,0 +1,45 @@
+name: Build and Deploy Logos
+
+on:
+  push:
+    branches:
+      - main   # 当推送到 main 分支时触发
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 检出仓库
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. 安装依赖
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y imagemagick
+
+      # 3. 转换 SVG/PNG 为 light/dark PNG
+      - name: Convert logos
+        run: |
+          mkdir -p png
+          for file in logos/*.{svg,png}; do
+            [ -e "$file" ] || continue
+            base=$(basename "$file" .svg)
+            base=$(basename "$base" .png)
+
+            # light 版本（白底）
+            convert -background white -resize 256x256 "$file" "png/${base}-light.png"
+
+            # dark 版本（透明背景）
+            convert -background transparent -resize 256x256 "$file" "png/${base}-dark.png"
+          done
+
+      # 4. 部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./png
