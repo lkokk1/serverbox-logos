@@ -3,28 +3,40 @@ name: Build and Deploy Logos
 on:
   push:
     branches:
-      - main   # 当推送到 main 分支时触发
-  workflow_dispatch: # 允许手动触发
+      - main
+  workflow_dispatch:
 
 permissions:
   contents: write
-  
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. 检出仓库
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2. 安装依赖
       - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y imagemagick
 
-      # 3. 转换 SVG/PNG 为 light/dark PNG
+      # 映射表：把常见别名复制成 ServerBox 能识别的名字
+      - name: Normalize filenames
+        run: |
+          mkdir -p logos
+          # Arch Linux
+          [ -f logos/archlinux.svg ] && cp logos/archlinux.svg logos/arch.svg || true
+          [ -f logos/archlinux.png ] && cp logos/archlinux.png logos/arch.png || true
+          # openSUSE
+          [ -f logos/opensuse.svg ] && cp logos/opensuse.svg logos/suse.svg || true
+          # Rocky Linux
+          [ -f logos/rockylinux.svg ] && cp logos/rockylinux.svg logos/rocky.svg || true
+          # Deepin
+          [ -f logos/deepin.svg ] && cp logos/deepin.svg logos/deepin.svg || true
+          # 其他发行版可按需添加
+
       - name: Convert logos
         run: |
           mkdir -p png
@@ -35,12 +47,10 @@ jobs:
 
             # light 版本（白底）
             convert -background white -resize 256x256 "$file" "png/${base}-light.png"
-
             # dark 版本（透明背景）
             convert -background transparent -resize 256x256 "$file" "png/${base}-dark.png"
           done
 
-      # 4. 部署到 GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
