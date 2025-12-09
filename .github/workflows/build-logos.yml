@@ -6,6 +6,9 @@ on:
       - main   # 当推送到 main 分支时触发
   workflow_dispatch: # 允许手动触发
 
+permissions:
+  contents: write
+  
 jobs:
   build:
     runs-on: ubuntu-latest
