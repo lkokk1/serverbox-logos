@@ -1,6 +1,10 @@
-📄 README.md（完整说明版）
+自用 自用 自用
+======
 
-`markdown
+📄 （完整说明）
+====
+
+`
 
 ServerBox Logos 自动切换方案
 
@@ -24,6 +28,7 @@ https://*.github.io/serverbox-logos/{DIST}-{BRIGHT}.png
 ---
 
 🐧 支持的发行版列表
+=
 
 | 发行版名称 | ServerBox {DIST} 值 | 原始文件名示例 | 是否需要映射 |
 |------------|-----------------------|----------------|--------------|
@@ -43,6 +48,7 @@ https://*.github.io/serverbox-logos/{DIST}-{BRIGHT}.png
 ---
 
 ⚙️ 自动化流程
+=
 
 - 上传文件：将原始 Logo 文件放入 logos/ 文件夹。  
 - GitHub Actions：自动运行脚本，统一命名并转换为 PNG。  
@@ -61,17 +67,19 @@ https://*.github.io/serverbox-logos/{DIST}-{BRIGHT}.png
 ---
 
 📜 版权声明
+=
 
 - 所有 Logo 的版权归各发行版官方所有。  
-- 本仓库仅用于技术演示和 ServerBox 使用。  
+- 本仓库仅用于技术演示。  
 - 脚本和工作流配置采用 MIT License。
 `
 
 ---
 
-📄 README-QuickStart.md（快速开始版）
+📄 （快速开始）
+=
 
-`markdown
+`
 
 快速开始
 
@@ -115,10 +123,10 @@ https://*.github.io/serverbox-logos/{DIST}-{BRIGHT}.png
 
 ---
 
-📄 README-FAQ.md（常见问题版）
+📄 （常见问题）
+=
 
-`markdown
-
+`
 常见问题 (FAQ)
 
 ---
